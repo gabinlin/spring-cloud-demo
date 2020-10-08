@@ -1,0 +1,16 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9090/eureka/,http://localhost:9091/eureka/,http://localhost:9092/eureka/
+    # 是否拉取注册表
+    fetch-registry: true
+    # 是否注册到服务中心（注册中心）
+    register-with-eureka: true
+  server:
+    # 不从三级缓存中取，直接从write中取
+    use-read-only-response-cache: false
+    # 自我保护关闭，快速下线
+    enable-self-preservation: false
+spring:
+  application:
+    name: eureka-server
