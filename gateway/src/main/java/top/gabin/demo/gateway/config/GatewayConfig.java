@@ -25,7 +25,7 @@ public class GatewayConfig {
 //                            config.setFallbackUri("http://localhost:9070");
 //                        }))
                         // 靠，看源码这里要登录才有效果，也就是说这个限流过滤器是依赖授权的，可能可以开启匿名登录
-                        .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(new RedisRateLimiter(1, 2))))
+                        .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter)))
                         .uri("http://localhost:9070"))
 //                .route("limit_route", r -> r
 //                        .path("/**")

@@ -11,7 +11,7 @@ spring:
           enabled: true
       filter:
         request-rate-limiter:
-          deny-empty-key: false
+#          deny-empty-key: false
 eureka:
   client:
     service-url:
