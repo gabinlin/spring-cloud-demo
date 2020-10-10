@@ -21,13 +21,9 @@ eureka:
       defaultZone: http://localhost:9090/eureka/,http://localhost:9091/eureka/,http://localhost:9092/eureka/
 server:
   port: 9080
-security:
-  oauth2:
-    resourceserver:
-      jwt:
-        jwk-set-uri: 'http://localhost:9400/rsa/publicKey' #配置RSA的公钥访问地址
 secure:
   ignore:
     urls: #配置白名单路径
       - "/actuator/**"
       - "/auth/oauth/token"
+      - "/auth/rsa/publicKey"
