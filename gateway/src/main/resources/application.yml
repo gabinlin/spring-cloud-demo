@@ -8,7 +8,10 @@ spring:
     gateway:
       discovery:
         locator:
+          # 将服务进行转发 http://网关地址/服务名/uri
           enabled: true
+          # eureka服务转发地址弄成小写的，http://网关地址/服务名/uri，服务名变成小写的
+          lower-case-service-id: true
       filter:
         request-rate-limiter:
 #          deny-empty-key: false
@@ -18,3 +21,13 @@ eureka:
       defaultZone: http://localhost:9090/eureka/,http://localhost:9091/eureka/,http://localhost:9092/eureka/
 server:
   port: 9080
+security:
+  oauth2:
+    resourceserver:
+      jwt:
+        jwk-set-uri: 'http://localhost:9400/rsa/publicKey' #配置RSA的公钥访问地址
+secure:
+  ignore:
+    urls: #配置白名单路径
+      - "/actuator/**"
+      - "/auth/oauth/token"

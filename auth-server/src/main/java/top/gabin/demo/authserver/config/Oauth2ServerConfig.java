@@ -37,7 +37,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .withClient("client-app")
                 .secret(passwordEncoder.encode("gabinlin"))
                 .scopes("all")
-                .authorizedGrantTypes("password", "refresh_token")
+                .authorizedGrantTypes("authorization_code", "password", "refresh_token")
                 .accessTokenValiditySeconds(3600)
                 .refreshTokenValiditySeconds(86400);
     }

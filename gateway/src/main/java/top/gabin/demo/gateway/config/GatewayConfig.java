@@ -1,18 +1,10 @@
 package top.gabin.demo.gateway.config;
 
-import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
-import io.github.resilience4j.timelimiter.TimeLimiterConfig;
-import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
-import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.cloud.gateway.filter.ratelimit.RateLimiter;
-import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.Duration;
 
 @Configuration
 public class GatewayConfig {
@@ -27,6 +19,9 @@ public class GatewayConfig {
                         // 靠，看源码这里要登录才有效果，也就是说这个限流过滤器是依赖授权的，可能可以开启匿名登录
                         .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter)))
                         .uri("http://localhost:9070"))
+                .route("oauth2-auth-route", r -> r.path("/auth/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://auth-server"))
 //                .route("limit_route", r -> r
 //                        .path("/**")
 //                        // 限流
