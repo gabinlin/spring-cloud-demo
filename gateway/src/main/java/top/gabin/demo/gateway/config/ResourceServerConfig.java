@@ -58,6 +58,7 @@ public class ResourceServerConfig {
 
     @Bean
     public ReactiveJwtDecoder reactiveJwtDecoder() {
+        // 比较尴尬的是，这里要先知道授权服务器地址
         return new NimbusReactiveJwtDecoder("http://localhost:9400/rsa/publicKey");
     }
 
