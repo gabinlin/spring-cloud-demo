@@ -21,7 +21,6 @@ import top.gabin.demo.gateway.component.RestAuthenticationEntryPoint;
 import top.gabin.demo.gateway.component.RestfulAccessDeniedHandler;
 import top.gabin.demo.gateway.constant.AuthConstant;
 
-import java.net.HttpURLConnection;
 import java.util.List;
 
 @AllArgsConstructor
